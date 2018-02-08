@@ -1,0 +1,10 @@
+#!/bin/bash
+CONTAINER=portainer
+IMAGE=portainer/portainer
+VOLUME_DATA=/var/docker/portainer/data/
+
+function create(){
+  docker run --restart=always -d -p 9000:9000 -v "/var/run/docker.sock:/var/run/docker.sock" -v ${VOLUME_DATA}:/data --name $CONTAINER $IMAGE
+}
+
+$@
