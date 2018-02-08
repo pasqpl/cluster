@@ -1,0 +1,18 @@
+#!/bin/bash -xv
+
+
+# ENV VARIABLES
+[ -z $HOME_DIRECTORY ] && HOME_DIRECTORY=/data/
+[ -z $DHCP_LEASES ] && DHCP_LEASES=${HOME_DIRECTORY}/dhcpd.leases
+[ -z $DHCP_CONF ] && DHCP_CONF=${HOME_DIRECTORY}/dhcpd.conf
+[ -z $DHCP_INTERFACE ] && DHCP_INTERFACE=eth1
+
+
+# FILES AND FOLDERS
+[ -f $DHCP_LEASES ] || touch $DHCP_LEASES
+
+echo ##########################
+echo $HOME_DIRECTORY $DHCP_LEASES $DHCP_CONF $DHCP_INTERFACE
+echo #########################
+
+exec /usr/sbin/dhcpd -4 -f -d --no-pid -cf "${DHCP_CONF}" -lf "${DHCP_LEASES}" ${DHCP_INTERFACE}
