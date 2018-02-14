@@ -1,0 +1,3 @@
+#!/bin/bash
+chmod 777 /var/cache/apt-cacher-ng
+/usr/sbin/apt-cacher-ng -c /etc/apt-cacher-ng pidfile=/var/run/apt-cacher-ng/pid SocketPath=/var/run/apt-cacher-ng/socket foreground=1
