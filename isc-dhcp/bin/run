@@ -16,6 +16,7 @@ function create(){
     -e DHCP_INTERFACE=eth1  \
     -e DHCP_CONF=/data/dhcpd.conf \
     -e DHCP_LEASES=/data/dhcpd.leases \
+    -v /var/pasqpl/isc-dhcp/dockerfiles:/data/ \
     -it --net=host \
     --name $CONTAINER $IMAGE
 }

@@ -15,4 +15,4 @@ echo ##########################
 echo $HOME_DIRECTORY $DHCP_LEASES $DHCP_CONF $DHCP_INTERFACE
 echo #########################
 
-exec /usr/sbin/dhcpd -4 -f -d --no-pid -cf "${DHCP_CONF}" -lf "${DHCP_LEASES}" ${DHCP_INTERFACE}
+/usr/sbin/dhcpd -4 -f -d --no-pid -cf "${DHCP_CONF}" -lf "${DHCP_LEASES}" ${DHCP_INTERFACE}
