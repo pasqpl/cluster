@@ -1,0 +1,6 @@
+#!/bin/bash
+docker stop openntp || true 
+docker rm openntp || true
+docker rmi cluster/openntp || true
+docker build -t cluster/openntp .
+docker run -d -it --net=host --name openntp cluster/openntp

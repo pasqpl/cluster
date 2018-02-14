@@ -1,0 +1,3 @@
+#!/bin/bash
+mkdir -p /var/run/openntpd
+/usr/sbin/ntpd -v -d -s
