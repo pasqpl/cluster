@@ -1,0 +1,3 @@
+#!/bin/bash -xv
+[ -z CONF_FILE ] || CONF_FILE=/etc/lighttpd/lighttpd.conf
+lighttpd -D -f $CONF_FILE
