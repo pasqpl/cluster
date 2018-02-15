@@ -10,6 +10,6 @@ prompt -k 0x197e -t 2000 Press F12 to reinstall OS... || exit
 dhcp || true
 
 :reinstall_os
-kernel ubuntu/linux quiet auto=true priority=critical preseed/url=tftp://10.6.1.1/ubuntu.cfg preseed/interactive=false || true
+kernel ubuntu/linux quiet auto=true priority=critical preseed/url=http://10.6.1.1:8080/ubuntu.cfg preseed/interactive=false || true
 initrd ubuntu/initrd.gz || true
 boot || goto retry_dhcp
