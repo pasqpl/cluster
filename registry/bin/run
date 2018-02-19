@@ -4,3 +4,4 @@ docker rm registry || true
 docker rmi cluster/registry || true
 docker build -t cluster/registry .
 docker run --restart=always -d -it -p5000:5000 -v /var/pasqpl/registry/dockerfiles/cache/:/var/lib/registry  --name registry cluster/registry
+
