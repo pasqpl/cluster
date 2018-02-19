@@ -1,0 +1,27 @@
+#!/bin/bash
+
+container=hello-node
+
+function build(){
+docker stop $container || true 
+docker rm $container || true
+docker rmi cluster/$container || true
+docker build -t cluster/$container .
+}
+
+
+function run(){
+docker run -d -it -p5555:8080 --name $container cluster/$container
+}
+
+function stop(){
+docker stop $container
+}
+
+
+push(){
+  docker tag cluster/hello-node localhost:5000/cluster/hello-node
+  docker push localhost:5000/cluster/hello-node
+}
+
+$@ 
