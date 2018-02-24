@@ -10,7 +10,7 @@ echo
 echo 
 echo 
 echo 
-prompt -k 0x197e -t 10000 Press F12 to reinstall OS... || exit
+#prompt -k 0x197e -t 10000 Press F12 to reinstall OS... || exit
 :reinstall_os
 echo Loading kernel...
 kernel http://10.6.1.1:8080/ubuntu/linux quiet auto=true priority=critical preseed/url=http://10.6.1.1:8080/ubuntu.cfg preseed/interactive=false || true
