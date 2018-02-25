@@ -1,7 +1,25 @@
 #!/bin/bash
-docker stop registry || true 
-docker rm registry || true
-docker rmi cluster/registry || true
-docker build -t cluster/registry .
-docker run --restart=always -d -it -p5000:5000 -v /var/pasqpl/registry/dockerfiles/cache/:/var/lib/registry  --name registry cluster/registry
+
+function tag(){
+#This is for filtering proposal
+docker pull registry:2
+docker tag registry:2 cluster/registry:2
+}
+
+
+function run(){
+#https://docs.docker.com/registry/deploying/#support-for-lets-encrypt
+docker stop registry
+docker rm registry
+docker run -d \
+  --restart=always \
+  --name registry \
+  -v /var/pasqpl/registry/dockerfiles/cache/:/var/lib/registry \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
+  -p 443:443 \
+  registry:2
+}
+
+$@
+
 

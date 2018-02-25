@@ -1,0 +1,1 @@
+http://apache.mirrors.pair.com/zookeeper/stable/
