@@ -1,0 +1,9 @@
+#!/bin/bash -e 
+container=hello-node
+docker stop $container || true 
+docker rm $container || true
+docker rmi cluster/$container || true
+docker build -t cluster/$container .
+docker tag cluster/hello-node localhost:443/cluster/hello-node
+docker push localhost:443/cluster/hello-node
+docker run -d -it -p5555:8080 --name $container cluster/$container
