@@ -18,7 +18,8 @@ HEALTHCHECK CMD [ $(echo ruok | nc 127.0.0.1:2181) == "imok" ] || exit 1
 
 
 ADD dockerfiles/run /opt/run
-RUN chmod 777 /opt/run.sh
-EXPOSE 2181 2888 3888 WORKDIR /opt/zookeeper
+RUN chmod 777 /opt/run
+EXPOSE 2181 2888 3888 
+WORKDIR /opt/zookeeper
 VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
 CMD ["/opt/run"]

@@ -1,23 +1,23 @@
 #!/bin/bash
-VERSION=v1.0
 CONTAINER=zookeeper
-IMAGE=cluster/$CONTAINER:$VERSION
+IMAGE=cluster/zookeeper
 
 function build(){
   docker stop $CONTAINER
   docker rm $CONTAINER
-  docker rmi $IMAGE
   docker build -t $IMAGE .
+  docker tag cluster/zookeeper  localhost:443/cluster/zookeeper
+  docker push localhost:443/cluster/zookeeper
 }
 
 function create(){
   docker stop $CONTAINER
   docker rm $CONTAINER 
-  docker run \
-    -it \
-    -v /var/pasqpl/lighthttpd/dockerfiles:/var/www/html \
-    -p 8080:80 \
-    --name $CONTAINER $IMAGE
+  docker run -d \
+   -p 2181:2181 \
+   -p 2888:2888 \
+   -p 3888:3888 \
+   --name $CONTAINER $IMAGE
 }
 
 function start(){
@@ -27,6 +27,10 @@ function start(){
 
 function stop(){
    docker stop $CONTAINER
+}
+
+function status(){
+   [ "a"$(echo ruok | nc 127.0.0.1:2181) == "a""imok" ] && echo OK  || echo NOK
 }
 
 
