@@ -16,7 +16,7 @@ serverhostname3=node3
 
 serverip1=10.6.1.101
 serverip2=10.6.1.102
-serverip2=10.6.1.103
+serverip3=10.6.1.103
 
 quorum=2
 
@@ -81,7 +81,6 @@ cat > /etc/marathon/conf/hostname <<EOF
 $serverip
 EOF
 
-
 cat > /etc/marathon/conf/master <<EOF
 zk://$serverip1:2181,$serverip2:2181,$serverip3:2181/mesos
 EOF
@@ -89,4 +88,18 @@ EOF
 cat > /etc/marathon/conf/zk <<EOF
 zk://$serverip1:2181,$serverip2:2181,$serverip3:2181/marathon
 EOF
+
+cat > /etc/mesos-slave/ip <<EOF
+$serverip
+EOF
+
+cat > /etc/mesos-slave/hostname <<EOF
+$serverip
+EOF
+
+systemctl enable mesos-master
+systemctl enable mesos-slave
+systemctl enable zookeeper
+systemctl enable marathon
+
 

@@ -2,3 +2,5 @@ isc-dhcp/dockerfiles/dhcpd.leases
 isc-dhcp/dockerfiles/dhcpd.leases~
 apt-cacher-ng/dockerfiles/cache/*
 registry/dockerfiles/cache/*
+lighthttpd/dockerfiles/centos/*
+ipxe/*

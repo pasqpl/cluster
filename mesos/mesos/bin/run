@@ -1,0 +1,4 @@
+#!/bin/bash
+docker pull mesosphere/mesos:1.5.0
+docker tag mesosphere/mesos:1.5.0  localhost:443/mesosphere/mesos:1.5.0
+docker push localhost:443/mesosphere/mesos:1.5.0
