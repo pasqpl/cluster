@@ -1,0 +1,26 @@
+#!ipxe
+echo "############################# iPXE BOOT boot.ipxe ############################"
+echo 
+echo Your IP: ${net0/ip}
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+#prompt -k 0x197e -t 10000 Press F12 to reinstall OS... || exit
+:reinstall_os
+echo Loading kernel...
+kernel http://10.6.1.1:8080/ubuntu-trusty/linux quiet ip=dhcp auto=true priority=critical preseed/url=http://10.6.1.1:8080/ubuntu-trusty/preseed.cfg preseed/interactive=false || true
+echo Loadig initrd...
+
+initrd http://10.6.1.1:8080/ubuntu-trusty/initrd.gz || true
+echo 
+echo 
+echo 
+echo 
+echo
+echo Booting...
+boot || exit
