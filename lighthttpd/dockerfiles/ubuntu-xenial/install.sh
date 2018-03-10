@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 apt-get update && \
   apt-get -y install apt-transport-https ca-certificates && \
@@ -6,13 +6,6 @@ apt-get update && \
   echo deb https://apt.dockerproject.org/repo ubuntu-xenial main > /etc/apt/sources.list.d/docker.list && \
   apt-get update && \
   apt-get -y install curl docker-engine
-
-
-
-
-
-
-
 
 
 
@@ -32,14 +25,6 @@ EOF
 /etc/init.d/docker restart
 
 
-
-
-
-
-
-
-
-
 cat > /etc/hosts <<EOF
 127.0.0.1       localhost
 
@@ -55,22 +40,6 @@ ff02::2 ip6-allrouters
 10.6.1.105 node5
 10.6.1.1 private.registry.local
 EOF
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function run_zk(){
@@ -98,7 +67,7 @@ docker run -d --restart=always --net=host \
   -e MESOS_PORT=5050 \
   -e MESOS_ZK=zk://10.6.1.101:2181,10.6.1.103:2181,10.6.1.105:2181/mesos \
   -e MESOS_IP=${SERVERIP}  \
-  -e MESOS_QUORUM=3 \
+  -e MESOS_QUORUM=2 \
   -e MESOS_HOSTNAME=$(hostname) \
   -e MESOS_REGISTRY=in_memory \
   -e MESOS_LOG_DIR=/var/log/mesos \
@@ -130,7 +99,8 @@ docker run -d --restart=always --net=host --privileged \
   -v /sys:/sys \
   --name slave \
   --entrypoint mesos-slave \
-  private.registry.local:443/mesosphere/mesos:1.5.0
+  private.registry.local:443/mesosphere/mesos:1.5.0 \
+  --no-systemd_enable_support 
 }
 
 docker stop zookeeper master slave 

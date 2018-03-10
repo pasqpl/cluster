@@ -98,7 +98,7 @@ docker run -d --restart=always --net=host \
   -e MESOS_PORT=5050 \
   -e MESOS_ZK=zk://10.6.1.101:2181,10.6.1.103:2181,10.6.1.105:2181/mesos \
   -e MESOS_IP=${SERVERIP}  \
-  -e MESOS_QUORUM=3 \
+  -e MESOS_QUORUM=2 \
   -e MESOS_HOSTNAME=$(hostname) \
   -e MESOS_REGISTRY=in_memory \
   -e MESOS_LOG_DIR=/var/log/mesos \
@@ -115,14 +115,11 @@ docker run -d --restart=always --net=host \
 function run_slave(){
 
 docker run -d --restart=always --net=host --privileged \
-  -e MESOS_PORT=5051 \
-  -e MESOS_MASTER=zk://10.6.1.101:2181,10.6.1.103:2181,10.6.1.105:2181/mesos \
   -e MESOS_SWITCH_USER=0 \
   -e MESOS_HOSTNAME=$(hostname) \
   -e MESOS_IP=${SERVERIP}  \
   -e MESOS_CONTAINERIZERS=docker,mesos \
   -e MESOS_LOG_DIR=/var/log/mesos \
-  -e MESOS_WORK_DIR=/var/tmp/mesos \
   -v "$(pwd)/log/mesos:/var/log/mesos" \
   -v "$(pwd)/tmp/mesos:/var/tmp/mesos" \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -131,6 +128,7 @@ docker run -d --restart=always --net=host --privileged \
   --name slave \
   --entrypoint mesos-slave \
   private.registry.local:443/mesosphere/mesos:1.5.0
+  --no-systemd_enable_support --master=zk://10.6.1.101:2181,10.6.1.103:2181,10.6.1.105:2181/mesos --work_dir=/var/tmp/mesos
 }
 
 docker stop zookeeper master slave 

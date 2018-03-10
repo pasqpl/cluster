@@ -13,6 +13,7 @@ function create(){
   docker stop $CONTAINER
   docker rm $CONTAINER 
   docker run \
+    -d \
     -e DHCP_INTERFACE=eth1  \
     -e DHCP_CONF=/data/dhcpd.conf \
     -e DHCP_LEASES=/data/dhcpd.leases \
