@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker build -t cluster/marathon .
+docker tag cluster/marathon  localhost:443/cluster/marathon
+docker push localhost:443/cluster/marathon
