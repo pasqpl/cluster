@@ -5,22 +5,21 @@ apt-get update && \
   apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
   echo deb https://apt.dockerproject.org/repo ubuntu-xenial main > /etc/apt/sources.list.d/docker.list && \
   apt-get update && \
-  apt-get -y install curl docker-engine
-
-
-
-
+  apt-get -y install docker-engine
 
 
 
 
 sed -i 's/PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
 # Adding unsecure registry.
-cat > /etc/docker/daemon.json <<EOF
+
+mkdir -p /etc/docker/
+
+cat > /etc/docker/daemon.json <<EOaF
 {
   "insecure-registries" : ["private.registry.local:443"]
 }
-EOF
+EOaF
 
 /etc/init.d/docker restart
 
