@@ -1,0 +1,25 @@
+{
+  "id": "demo4",
+  "cpus": 0.1,
+  "mem": 64.0,
+  "healthChecks" : [ {
+    "path": "/",
+    "portIndex": 0,
+    "protocol": "MESOS_HTTP",
+    "intervalSeconds": 60,
+    "timeoutSeconds": 20,
+    "maxConsecutiveFailures": 3,
+    "ignoreHttp1xx": false
+  }] ,
+  "networks": [ { "mode": "container/bridge" } ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "private.registry.local:443/cluster/hello-node:latest"
+    },
+    "portMappings": [
+      { "containerPort": 8080, "hostPort": 0 }
+    ]
+  }
+}
+
