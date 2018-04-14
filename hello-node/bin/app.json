@@ -1,11 +1,12 @@
 {
   "id": "demo4",
+  "instances": 4,
   "cpus": 0.1,
   "mem": 64.0,
   "healthChecks" : [ {
     "path": "/",
     "portIndex": 0,
-    "protocol": "MESOS_HTTP",
+    "protocol": "HTTP",
     "intervalSeconds": 60,
     "timeoutSeconds": 20,
     "maxConsecutiveFailures": 3,
