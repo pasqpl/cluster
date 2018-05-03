@@ -4,13 +4,16 @@
   "cpus": 0.1,
   "mem": 64.0,
   "healthChecks" : [ {
-    "path": "/",
-    "portIndex": 0,
-    "protocol": "HTTP",
-    "intervalSeconds": 60,
-    "timeoutSeconds": 20,
-    "maxConsecutiveFailures": 3,
-    "ignoreHttp1xx": false
+  "path": "/",
+  "portIndex": 0,
+  "protocol": "HTTP",
+  "gracePeriodSeconds": 60,
+  "intervalSeconds": 30,
+  "timeoutSeconds": 5,
+  "maxConsecutiveFailures": 3,
+  "ignoreHttp1xx": false
+
+
   }] ,
   "networks": [ { "mode": "container/bridge" } ],
   "container": {
