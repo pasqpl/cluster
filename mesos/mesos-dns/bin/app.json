@@ -1,0 +1,27 @@
+{
+  "id": "mesos-dns",
+  "cpus": 0.2,
+  "instances":2,
+  "mem": 256.0,
+  "networks": [ { "mode": "host" } ],
+  "constraints": [["hostname", "UNIQUE"]],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+              "image": "private.registry.local:443/mesos-dns",
+               "privileged": true
+      }
+  },
+  "healthChecks" : [ {
+  "path": "/v1/version",
+  "port": 8123,
+  "protocol": "HTTP",
+  "gracePeriodSeconds": 60,
+  "intervalSeconds": 30,
+  "timeoutSeconds": 5,
+  "maxConsecutiveFailures": 3,
+  "ignoreHttp1xx": false
+
+
+  }]
+}

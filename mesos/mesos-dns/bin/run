@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker build -t mesos-dns .
+docker tag mesos-dns  localhost:443/mesos-dns
+docker push localhost:443/mesos-dns
