@@ -6,6 +6,9 @@ ZOO_CFG="/opt/zookeeper/conf/zoo.cfg"
 echo "server id (myid): ${SERVER_ID}"
 echo "${SERVER_ID}" > /tmp/zookeeper/myid
 
+# Remove old servers form the configuration
+sed -e "/^server\.[0-9]*=.*/d" $ZOO_CFG
+
 # Add additional ZooKeeper servers into the zoo.cfg file
 [ -z ${ADDITIONAL_ZOOKEEPER_1} ] || echo "${ADDITIONAL_ZOOKEEPER_1}" >> ${ZOO_CFG}
 [ -z ${ADDITIONAL_ZOOKEEPER_2} ] || echo "${ADDITIONAL_ZOOKEEPER_2}" >> ${ZOO_CFG}
